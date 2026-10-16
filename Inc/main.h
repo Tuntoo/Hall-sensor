@@ -30,22 +30,18 @@ extern "C" {
 #define SPC_MAX_INTERVALS          (SPC_MAX_NIBBLES + 1U)
 
 /* Keep Frame A unless the sensor EEPROM is confirmed to use another format.
- * Frame A: status | M1 M2 M3 | S3 S2 S1 | CRC (8 nibbles).
- * Frame B: status | M1 M2 M3 M4 | S4 S3 S2 S1 | CRC (10 nibbles).
- * Frame C has the same 3-nibble Main as A, plus extra data. */
+ * Frame A: status | M1 M2 M3 | S3 S2 S1 | CRC (8 nibbles).*/
 #define SPC_FRAME_A                0
-#define SPC_FRAME_B                1
-#define SPC_FRAME_C                2
 #ifndef SPC_FRAME_TYPE
 #define SPC_FRAME_TYPE             SPC_FRAME_A
 #endif
 
 /* Raw-to-level conversion configuration. */
 #define LEVEL_RAW_MIN              0U
-#define LEVEL_RAW_CENTER           2048U
+#define LEVEL_RAW_CENTER           2048U		/* Thông số khi không có nam châm sẽ tăng hoặc giảm dựa trên cực của nam châm */
 #define LEVEL_RAW_MAX			   3091U
 #define LEVEL_MIN                  1U
-#define LEVEL_MAX                  100U
+#define LEVEL_MAX                  100U			/* range của level từ 1-100 */
 
 /* Conversion assumes zero code 2048 and sensitivity 36.875 LSB/mT. */
 #define SENSOR_ZERO_CODE           2048L
@@ -53,14 +49,14 @@ extern "C" {
 
 
 /* Wheel-speed detection from normalized sensor level (0..100). */
-#define WHEEL_LEVEL_THRESHOLD       1U
+#define WHEEL_LEVEL_THRESHOLD       1U			/* mức độ thay đổi là bao nhiêu sẽ tính tăng coungter*/
 #define WHEEL_RETURN_TOLERANCE      1U
 #define WHEEL_STABLE_FRAMES         3U
 #define WHEEL_STABLE_TOLERANCE      0U
-#define WHEEL_BASELINE_IDLE_MS      2000U
+#define WHEEL_BASELINE_IDLE_MS      2000U		/* Thời gian chờ của sensor khi khống có thay đổi*/
 #define WHEEL_MIN_REV_INTERVAL_MS   100U
 #define WHEEL_STOP_TIMEOUT_MS       1000U
-#define HOLE_PER_WHEEL				4U
+#define HOLE_PER_WHEEL				4U 			/* Thay đổi khi số lỗ có trên đĩa */
 
 typedef struct {
     uint16_t raw;                 /* Main raw code, not filtered */
