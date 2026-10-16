@@ -60,6 +60,7 @@ extern "C" {
 #define WHEEL_BASELINE_IDLE_MS      2000U
 #define WHEEL_MIN_REV_INTERVAL_MS   100U
 #define WHEEL_STOP_TIMEOUT_MS       1000U
+#define HOLE_PER_WHEEL				4U
 
 typedef struct {
     uint16_t raw;                 /* Main raw code, not filtered */
@@ -91,10 +92,12 @@ typedef struct {
     uint8_t  initialized;
     uint8_t  have_cycle_time;
     uint32_t revolutions;
+    uint32_t counter;
     uint32_t last_rev_interval_ms;
     uint32_t last_rev_time_ms;
     uint32_t stable_since_ms;
     uint32_t rpm;
+
 } WheelSpeed_t;
 
 extern volatile Sensor_t g_sensor;
